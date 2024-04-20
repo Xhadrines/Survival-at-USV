@@ -1,0 +1,4 @@
+repository "Survival at USV@Xhadrines@cloud"
+  path "/"
+    br "/main"
+    co "/main"
