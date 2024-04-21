@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,15 @@ namespace SurvivalAtUSV
         [SerializeField] Text dialogText;
         [SerializeField] int lettersPerSecond;
 
+        public event Action OnShowDialog;
+        public event Action OnHideDialog;
+
+        Dialog dialog;
+
+        int currentLine;
+
+        bool isTyping;
+
         public static DialogManager Instance
         {
             get;
@@ -22,20 +32,43 @@ namespace SurvivalAtUSV
             Instance = this;
         }
 
-        public void HandleUpdate()
+        public IEnumerator ShowDialog(Dialog dialog)
         {
+            currentLine = 0;
 
-        }
+            yield return new WaitForEndOfFrame();
 
-        public void ShowDialog(Dialog dialog)
-        {
+            OnShowDialog?.Invoke();
+
+            this.dialog = dialog;
+
             dialogBox.SetActive(true);
 
             StartCoroutine(TypeDialog(dialog.Lines[0]));
         }
 
+        public void HandleUpdate()
+        {
+            if (Input.GetKeyUp(KeyCode.Space) && !isTyping)
+            {
+                ++currentLine;
+
+                if (currentLine < dialog.Lines.Count)
+                    StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
+                
+                else
+                {
+                    dialogBox.SetActive(false);
+
+                    OnHideDialog?.Invoke();
+                }
+            }
+        }
+
         public IEnumerator TypeDialog(string line)
         {
+            isTyping = true;
+
             dialogText.text = "";
 
             foreach (var letter in line.ToCharArray())
@@ -44,6 +77,7 @@ namespace SurvivalAtUSV
 
                 yield return new WaitForSeconds(1f / lettersPerSecond);
             }
+            isTyping = false;
         }
     }
 }

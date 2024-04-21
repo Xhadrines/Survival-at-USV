@@ -60,7 +60,7 @@ namespace SurvivalAtUSV
             var facingDirection = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
             var interactPosition = transform.position + facingDirection;
 
-            Debug.DrawLine(transform.position, interactPosition, Color.red, 1f);
+            // Debug.DrawLine(transform.position, interactPosition, Color.red, 1f);
 
             var collider = Physics2D.OverlapCircle(interactPosition, 0.2f, interactableLayer);
 

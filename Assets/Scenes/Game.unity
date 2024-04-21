@@ -6938,7 +6938,7 @@ Transform:
   m_GameObject: {fileID: 1520811016}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.52, y: 2.85, z: 0}
+  m_LocalPosition: {x: 2.23, y: 2.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6953,9 +6953,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520811016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3253d289dd407bc40aa93ceb82372d0d, type: 3}
+  m_Script: {fileID: 11500000, guid: c8a9f843ecf11e84fbc7c98cb98cf29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialog:
+    lines:
+    - Don't hit me!
+    - I'll do whatever you want!
 --- !u!1 &1732275734
 GameObject:
   m_ObjectHideFlags: 0
@@ -7037,7 +7041,7 @@ Transform:
   m_GameObject: {fileID: 1732275734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.04, y: 2.29, z: 0}
+  m_LocalPosition: {x: -2.82, y: 2.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7124,13 +7128,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732275734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8a9f843ecf11e84fbc7c98cb98cf29b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3253d289dd407bc40aa93ceb82372d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialog:
     lines:
-    - Don't hit me!
-    - I'll do whatever you want!
+    - Hey you!
+    - I'm better than you!
+    - Fool!
 --- !u!1 &2000766548
 GameObject:
   m_ObjectHideFlags: 0

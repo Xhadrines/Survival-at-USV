@@ -15,6 +15,20 @@ namespace SurvivalAtUSV
 
         GameState state;
 
+        private void Start()
+        {
+            DialogManager.Instance.OnShowDialog += () =>
+            {
+                state = GameState.Dialog;
+            };
+
+            DialogManager.Instance.OnHideDialog += () =>
+            {
+                if (state == GameState.Dialog)
+                    state = GameState.FreeMove;
+            };
+        }
+
         private void Update()
         {
             if (state == GameState.FreeMove)

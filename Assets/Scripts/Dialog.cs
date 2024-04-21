@@ -11,7 +11,10 @@ namespace SurvivalAtUSV
 
         public List<string> Lines
         {
-            get { return lines; }
+            get 
+            { 
+                return lines; 
+            }
         }
     }
 }
