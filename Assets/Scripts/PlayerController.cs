@@ -2,91 +2,94 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace SurvivalAtUSV
 {
-    public float moveSpeed;
-
-    private bool isMoving;
-
-    private Vector2 input;
-
-    private Animator animator;
-
-    public LayerMask solidObjectsLayer;
-    public LayerMask interactableLayer;
-
-    private void Awake() 
+    public class PlayerController : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        public float moveSpeed;
 
-    private void Update()
-    {
-        if (!isMoving)
+        private bool isMoving;
+
+        private Vector2 input;
+
+        private Animator animator;
+
+        public LayerMask solidObjectsLayer;
+        public LayerMask interactableLayer;
+
+        private void Awake() 
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            animator = GetComponent<Animator>();
+        }
 
-            // Debug.Log("This is input.x: " + input.x);
-            // Debug.Log("This is input.y: " + input.y);
-
-            if (input.x != 0)
-                input.y = 0;
-
-            if (input != Vector2.zero)
+        public void HandleUpdate()
+        {
+            if (!isMoving)
             {
-                animator.SetFloat("moveX", input.x);
-                animator.SetFloat("moveY", input.y);
+                input.x = Input.GetAxisRaw("Horizontal");
+                input.y = Input.GetAxisRaw("Vertical");
 
-                var targetPosition = transform.position;
+                // Debug.Log("This is input.x: " + input.x);
+                // Debug.Log("This is input.y: " + input.y);
 
-                targetPosition.x += input.x;
-                targetPosition.y += input.y;
+                if (input.x != 0)
+                    input.y = 0;
 
-                if (IsWalkable(targetPosition))
-                    StartCoroutine(Move(targetPosition));
+                if (input != Vector2.zero)
+                {
+                    animator.SetFloat("moveX", input.x);
+                    animator.SetFloat("moveY", input.y);
+
+                    var targetPosition = transform.position;
+
+                    targetPosition.x += input.x;
+                    targetPosition.y += input.y;
+
+                    if (IsWalkable(targetPosition))
+                        StartCoroutine(Move(targetPosition));
+                }
             }
+            animator.SetBool("isMoving", isMoving);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                Interact();
         }
-        animator.SetBool("isMoving", isMoving);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            Interact();
-    }
-
-    void Interact()
-    {
-        var facingDirection = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-        var interactPosition = transform.position + facingDirection;
-
-        Debug.DrawLine(transform.position, interactPosition, Color.red, 1f);
-
-        var collider = Physics2D.OverlapCircle(interactPosition, 0.2f, interactableLayer);
-
-        if (collider != null)
-            Debug.Log("This is an NPC!");
-    }
-
-    IEnumerator Move(Vector3 targetPosition)
-    {
-        isMoving = true;
-
-        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+        void Interact()
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            var facingDirection = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+            var interactPosition = transform.position + facingDirection;
 
-            yield return null;
+            Debug.DrawLine(transform.position, interactPosition, Color.red, 1f);
+
+            var collider = Physics2D.OverlapCircle(interactPosition, 0.2f, interactableLayer);
+
+            if (collider != null)
+                collider.GetComponent<Interactable>()?.Interact();
         }
 
-        transform.position = targetPosition;
-        
-        isMoving = false;
-    }
+        IEnumerator Move(Vector3 targetPosition)
+        {
+            isMoving = true;
 
-    private bool IsWalkable(Vector3 targetPosition)
-    {
-        if (Physics2D.OverlapCircle(targetPosition, 0.2f, solidObjectsLayer | interactableLayer) != null)
-            return false;
+            while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+                yield return null;
+            }
+
+            transform.position = targetPosition;
             
-        return true;
+            isMoving = false;
+        }
+
+        private bool IsWalkable(Vector3 targetPosition)
+        {
+            if (Physics2D.OverlapCircle(targetPosition, 0.2f, solidObjectsLayer | interactableLayer) != null)
+                return false;
+                
+            return true;
+        }
     }
 }
