@@ -9,10 +9,12 @@ namespace SurvivalAtUSV
         // Declarare pentru obiectul AudioSource care va reda muzica.
         [Header(">--------------------<Audio Source>--------------------<")]
         [SerializeField] AudioSource musicSource;
+        [SerializeField] AudioSource SFX;
 
         // Declarare pentru clipul audio care va fi redat.
         [Header(">--------------------<Audio Clip>--------------------<")]
         public AudioClip background;
+        public AudioClip door;
 
         // Declarare pentru volumul muzicii, cu un slider disponibil între 0 și 1 în editorul Unity.
         [Header(">--------------------<Audio Volume>--------------------<")]

@@ -98,6 +98,7 @@ namespace SurvivalAtUSV
             isMoving = true;
 
             // Cat timp jucatorul nu a ajuns la destinatie, il miscam in directia destinatiei.
+
             while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
