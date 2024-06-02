@@ -103,5 +103,11 @@ namespace SurvivalAtUSV
             }
             isTyping = false;
         }
+
+        internal void StopDialog()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
