@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace SurvivalAtUSV
 {
-    public void PlayGame()
+    public class MainMenu : MonoBehaviour
     {
-        SceneManager.LoadSceneAsync(1);
-    }
+        public void PlayGame()
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

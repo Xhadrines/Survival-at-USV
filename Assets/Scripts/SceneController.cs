@@ -1,30 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+namespace SurvivalAtUSV
 {
-    public static SceneController instance;
-
-    private void Awake() 
+    public class SceneController : MonoBehaviour
     {
-        if (instance == null)
+        public static SceneController instance;
+
+        private void Awake() 
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        public void NextLevel()
         {
-            Destroy(gameObject);
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         }
-    }
 
-    public void NextLevel()
-    {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void LoadScene(string sceneName) 
-    {
-        SceneManager.LoadSceneAsync(sceneName);
+        public void LoadScene(string sceneName) 
+        {
+            SceneManager.LoadSceneAsync(sceneName);
+        }
     }
 }
