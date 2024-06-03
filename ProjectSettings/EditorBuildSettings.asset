@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CorpC.unity
     guid: 30a67b7ccc5c9a74e9e982654e57e098
+  - enabled: 1
+    path: Assets/Scenes/CorpC_Etaj1.unity
+    guid: 001584ccc9603344d8b70650d59fdf03
+  - enabled: 1
+    path: Assets/Scenes/CorpC_Etaj1_102.unity
+    guid: 360f551b4964a494dacbe70b15deb22f
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: 6a38d75c6c963ab46b704c41596bdc74
   m_configObjects: {}

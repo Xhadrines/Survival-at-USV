@@ -5,16 +5,13 @@ using UnityEngine.SceneManagement;
 // Spatiul de nume pentru a organiza si grupa clasele si alte entitati legate de jocul "Survival at USV".
 namespace SurvivalAtUSV
 {
-    public class MainMenu : MonoBehaviour
+    public class EndGame : MonoBehaviour, Interactable
     {
-        public void PlayGame()
+        // Metoda pentru a interactiona cu jucatorul.
+        public void Interact()
         {
-            SceneManager.LoadSceneAsync(1);
-        }
-
-        public void QuitGame()
-        {
-            Application.Quit();
+            // Schimbare scena
+            SceneManager.LoadScene(5);
         }
     }
 }
